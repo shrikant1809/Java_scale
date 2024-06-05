@@ -1,0 +1,18 @@
+public class Solution {
+    public int solve(int[] A, int[] B, int[] C, int D) {
+        int N = A.length;
+        int[] dp = new int[D + 1];
+
+        for (int i = 0; i < N; i++) {
+            int candies = A[i];
+            int sweetness = B[i];
+            int cost = C[i];
+            int packetSweetness = candies * sweetness;
+
+            for (int j = cost; j <= D; j++) {
+                dp[j] = Math.max(dp[j], dp[j - cost] + packetSweetness);
+            }
+        }
+
+        return dp[D];
+    }
